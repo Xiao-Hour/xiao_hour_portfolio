@@ -2,7 +2,7 @@
 // Imports
 // ==========================================
 import { useState, useEffect } from "react";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet, useLocation, ScrollRestoration } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   CodeIcon,
@@ -39,7 +39,10 @@ export default function TopBarLayout() {
   const [scrolled, setScrolled]   = useState(false);
   const location = useLocation();
 
-  useEffect(() => { setMenuOpen(false); }, [location.pathname]);
+  useEffect(() => {
+    setMenuOpen(false);
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [location.pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -57,6 +60,7 @@ export default function TopBarLayout() {
       className="min-h-screen flex flex-col"
       style={{ backgroundColor: "var(--color-canvas)", color: "var(--color-text-primary)" }}
     >
+      <ScrollRestoration />
       {/* ── Top Navigation ───────────────────────────── */}
       <header
         className="sticky top-0 z-50 transition-all duration-300"
