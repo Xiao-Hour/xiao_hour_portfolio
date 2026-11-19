@@ -21,11 +21,20 @@
   --color-accent:       #4D2A00;
   --color-accent-soft:  rgba(77, 42, 0, 0.08);
   --color-accent-hover: #633600;
+  --color-amber:        #B45309;
+  --color-amber-soft:   rgba(180, 83, 9, 0.12);
+  --color-amber-light:  #D97706;
+
+  /* ─── Glass & Shadows ────────────────────────────── */
+  --glass-bg:           rgba(255, 255, 255, 0.78);
+  --glass-border:       rgba(232, 226, 217, 0.85);
+  --shadow-subtle:      0 4px 20px -2px rgba(77, 42, 0, 0.05);
+  --shadow-hover:       0 12px 32px -4px rgba(77, 42, 0, 0.12);
 
   /* ─── Legacy aliases ─────────────────────────────── */
   --color-primary:    #4D2A00;
   --color-secondary:  #4A5568;
-  --color-bg-custom:  #F8FAFB;
+  --color-bg-custom:  #FAF8F5;
 }
 
 /* ─── Base ───────────────────────────────────────────── */
@@ -109,4 +118,50 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
+}
+
+/* ─── Glassmorphism & High-End Card Polish ──────────── */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-subtle);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(77, 42, 0, 0.35);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-3px);
+}
+
+/* ─── Marquee Animation ─────────────────────────────── */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Gradient Accent Text ──────────────────────────── */
+.gradient-accent-text {
+  background: linear-gradient(135deg, #4D2A00 0%, #8D4900 50%, #C27803 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

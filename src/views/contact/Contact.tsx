@@ -174,7 +174,7 @@ export default function Contact() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5" noValidate>
+              <form onSubmit={handleSubmit} className="p-8 sm:p-10 rounded-2xl border glass-card flex flex-col gap-6" noValidate>
                 <div className="grid sm:grid-cols-2 gap-5">
                   {/* Name */}
                   <div className="flex flex-col gap-1.5">
@@ -303,12 +303,12 @@ export default function Contact() {
           >
             {/* Availability card */}
             <div
-              className="p-6 rounded border"
-              style={{ borderColor: "var(--color-accent)", backgroundColor: "var(--color-accent-soft)" }}
+              className="p-7 rounded-2xl border glass-panel shadow-sm"
+              style={{ borderColor: "rgba(16, 185, 129, 0.3)", backgroundColor: "rgba(16, 185, 129, 0.05)" }}
             >
               <div className="flex items-center gap-2 mb-3">
-                <span className="w-2.5 h-2.5 rounded-full animate-pulse" style={{ backgroundColor: "var(--color-accent)" }} />
-                <span className="label-mono" style={{ color: "var(--color-accent)" }}>Available for work</span>
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="label-mono font-bold text-xs" style={{ color: "#065f46" }}>Available for work</span>
               </div>
               <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
                 I'm open to front-end & mobile development opportunities, freelance projects, and IT consulting.
@@ -318,8 +318,7 @@ export default function Contact() {
 
             {/* Contact links */}
             <div
-              className="p-6 rounded border flex flex-col gap-4"
-              style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-surface)" }}
+              className="p-7 rounded-2xl border glass-card flex flex-col gap-4"
             >
               <span className="label-mono" style={{ color: "var(--color-text-muted)" }}>Find me on</span>
               {CONTACT_LINKS.map(({ icon: Icon, label, value, href }) => (

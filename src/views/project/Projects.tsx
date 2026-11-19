@@ -194,11 +194,9 @@ export default function Projects() {
 
             {/* ── Filter Bar ──────────────────────────────────── */}
             <section
-                className="sticky top-16 z-40 border-b px-6 py-3"
+                className="sticky top-16 z-40 border-b px-6 py-3.5 glass-panel"
                 style={{
                     borderColor: "var(--color-border)",
-                    backgroundColor: "rgba(248, 250, 251, 0.85)",
-                    backdropFilter: "blur(16px)",
                 }}
             >
                 <div className="max-w-7xl mx-auto flex items-center gap-2 flex-wrap">
@@ -206,13 +204,14 @@ export default function Projects() {
                         <button
                             key={cat}
                             onClick={() => setActiveFilter(cat)}
-                            className="label-mono px-4 py-1.5 rounded transition-all duration-200"
+                            className="label-mono px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer"
                             style={{
                                 backgroundColor:
                                     activeFilter === cat ? "var(--color-accent)" : "transparent",
                                 color:
-                                    activeFilter === cat ? "#fff" : "var(--color-text-muted)",
-                                border: `1px solid ${activeFilter === cat ? "var(--color-accent)" : "var(--color-border)"}`,
+                                    activeFilter === cat ? "#fff" : "var(--color-text-secondary)",
+                                border: `1px solid ${activeFilter === cat ? "var(--color-accent)" : "var(--color-border-soft)"}`,
+                                boxShadow: activeFilter === cat ? "0 2px 8px rgba(77, 42, 0, 0.2)" : "none",
                             }}
                         >
                             {cat}
@@ -243,40 +242,40 @@ export default function Projects() {
                                     description,
                                     longDescription,
                                     tags,
+                                    category,
                                     liveHref,
                                     githubHref,
                                     year,
                                 }) => (
                                     <Reveal key={slug}>
                                         <article
-                                            className="group flex flex-col h-full p-7 rounded border transition-all duration-300"
-                                            style={{
-                                                borderColor: "var(--color-border)",
-                                                backgroundColor: "var(--color-surface)",
-                                            }}
-                                            onMouseEnter={(e) =>
-                                            ((e.currentTarget as HTMLElement).style.borderColor =
-                                                "var(--color-accent)")
-                                            }
-                                            onMouseLeave={(e) =>
-                                            ((e.currentTarget as HTMLElement).style.borderColor =
-                                                "var(--color-border)")
-                                            }
+                                            className="group flex flex-col h-full p-8 rounded-2xl border glass-card"
                                         >
                                             {/* Header row */}
-                                            <div className="flex items-start justify-between mb-5">
+                                            <div className="flex items-start justify-between mb-4">
                                                 <span
-                                                    className="label-mono"
+                                                    className="label-mono font-black text-sm"
                                                     style={{ color: "var(--color-accent)" }}
                                                 >
                                                     {slug}
                                                 </span>
-                                                <span
-                                                    className="label-mono"
-                                                    style={{ color: "var(--color-text-muted)" }}
-                                                >
-                                                    {year}
-                                                </span>
+                                                <div className="flex items-center gap-2">
+                                                    <span
+                                                        className="label-mono text-[10px] px-2 py-0.5 rounded"
+                                                        style={{
+                                                            backgroundColor: "var(--color-accent-soft)",
+                                                            color: "var(--color-accent)",
+                                                        }}
+                                                    >
+                                                        {category}
+                                                    </span>
+                                                    <span
+                                                        className="label-mono text-xs"
+                                                        style={{ color: "var(--color-text-muted)" }}
+                                                    >
+                                                        {year}
+                                                    </span>
+                                                </div>
                                             </div>
 
                                             {/* Title */}

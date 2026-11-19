@@ -94,7 +94,7 @@ export default function TopBarLayout() {
           </NavLink>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
+          <nav className="hidden md:flex items-center gap-1.5 p-1 rounded-xl border" style={{ borderColor: "var(--color-border-soft)", backgroundColor: "rgba(244, 240, 235, 0.6)" }} aria-label="Main navigation">
             {NAV_ITEMS.map((item) => (
               <NavLink
                 key={item.path}
@@ -102,8 +102,10 @@ export default function TopBarLayout() {
                 end={item.path === "/"}
                 className="label-mono px-4 py-2 rounded-lg transition-all duration-200"
                 style={({ isActive }) => ({
-                  color: isActive ? "var(--color-accent)" : "var(--color-text-secondary)",
-                  backgroundColor: isActive ? "var(--color-accent-soft)" : "transparent",
+                  color: isActive ? "#fff" : "var(--color-text-secondary)",
+                  backgroundColor: isActive ? "var(--color-accent)" : "transparent",
+                  fontWeight: isActive ? 600 : 500,
+                  boxShadow: isActive ? "0 2px 8px rgba(77, 42, 0, 0.25)" : "none",
                 })}
               >
                 {item.label}
@@ -113,28 +115,35 @@ export default function TopBarLayout() {
 
           {/* Desktop: social + CTA */}
           <div className="hidden md:flex items-center gap-3">
-            {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="p-1.5 rounded-lg transition-colors duration-200"
-                style={{ color: "var(--color-text-muted)" }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "var(--color-accent)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = "var(--color-text-muted)")
-                }
-              >
-                <Icon size={18} />
-              </a>
-            ))}
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs" style={{ borderColor: "rgba(16, 185, 129, 0.3)", backgroundColor: "rgba(16, 185, 129, 0.08)", color: "#065f46" }}>
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="label-mono text-[10px]">Open to roles</span>
+            </div>
+
+            <a
+              href="/Hy_Meng_Hour_CV.pdf"
+              download
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold border transition-all duration-200"
+              style={{
+                borderColor: "var(--color-border)",
+                backgroundColor: "var(--color-surface)",
+                color: "var(--color-accent)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "var(--color-accent)";
+                e.currentTarget.style.backgroundColor = "var(--color-accent-soft)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "var(--color-border)";
+                e.currentTarget.style.backgroundColor = "var(--color-surface)";
+              }}
+            >
+              Resume
+            </a>
+
             <a
               href="/contact"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold transition-all duration-200 shadow-sm"
               style={{ backgroundColor: "var(--color-accent)", color: "#fff" }}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.backgroundColor = "var(--color-accent-hover)")
@@ -143,7 +152,7 @@ export default function TopBarLayout() {
                 (e.currentTarget.style.backgroundColor = "var(--color-accent)")
               }
             >
-              Hire me
+              Let's talk
               <ArrowUpRightIcon size={14} weight="bold" />
             </a>
           </div>
@@ -265,36 +274,54 @@ export default function TopBarLayout() {
 
       {/* ── Footer ───────────────────────────────────── */}
       <footer
-        className="border-t px-6 py-8"
+        className="border-t px-6 py-10"
         style={{
           borderColor: "var(--color-border)",
           backgroundColor: "var(--color-surface)",
         }}
       >
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <span className="label-mono" style={{ color: "var(--color-text-muted)" }}>
-            © {new Date().getFullYear()} Hy Menghour — Frontend & Mobile Developer
-          </span>
-          <div className="flex items-center gap-5">
-            {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="transition-colors duration-200"
-                style={{ color: "var(--color-text-muted)" }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "var(--color-accent)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = "var(--color-text-muted)")
-                }
-              >
-                <Icon size={18} />
-              </a>
-            ))}
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+            <span className="label-mono font-bold" style={{ color: "var(--color-text-primary)" }}>
+              Hy Menghour
+            </span>
+            <span className="hidden sm:inline text-xs opacity-40">•</span>
+            <span className="label-mono text-xs" style={{ color: "var(--color-text-muted)" }}>
+              Front-End & Mobile Developer • Siem Reap, Cambodia (UTC+7)
+            </span>
+          </div>
+
+          <div className="flex items-center gap-6">
+            <span className="label-mono text-xs hidden lg:inline" style={{ color: "var(--color-text-muted)" }}>
+              © {new Date().getFullYear()} All rights reserved
+            </span>
+            <div className="flex items-center gap-4">
+              {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="p-2 rounded-lg border transition-all duration-200"
+                  style={{
+                    borderColor: "var(--color-border-soft)",
+                    backgroundColor: "var(--color-surface-2)",
+                    color: "var(--color-text-secondary)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = "var(--color-accent)";
+                    e.currentTarget.style.color = "var(--color-accent)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = "var(--color-border-soft)";
+                    e.currentTarget.style.color = "var(--color-text-secondary)";
+                  }}
+                >
+                  <Icon size={16} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </footer>

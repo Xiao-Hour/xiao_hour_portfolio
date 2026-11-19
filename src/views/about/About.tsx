@@ -111,7 +111,7 @@ export default function About() {
             >
               Building interfaces with
               <br />
-              <span style={{ color: "var(--color-accent)" }}>passion & precision.</span>
+              <span className="gradient-accent-text">passion & precision.</span>
             </h1>
             <p
               className="text-xl max-w-2xl leading-relaxed"
@@ -134,22 +134,18 @@ export default function About() {
             transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}
             className="hidden lg:block"
           >
-            <div className="relative">
-              {/* Corner accents */}
+            <div className="relative group">
               <div
-                className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 rounded-tl-lg"
-                style={{ borderColor: "var(--color-accent)" }}
+                className="absolute -inset-3 rounded-2xl opacity-20 blur-xl transition-opacity duration-500 group-hover:opacity-35"
+                style={{ background: "radial-gradient(circle, #8D4900 0%, #4D2A00 70%, transparent 80%)" }}
               />
-              <div
-                className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 rounded-br-lg"
-                style={{ borderColor: "var(--color-accent)" }}
-              />
-              <img
-                src={profileImg}
-                alt="Hy Menghour"
-                className="w-full h-[420px] object-cover object-top rounded-xl shadow-md"
-                style={{ border: "1px solid var(--color-border)" }}
-              />
+              <div className="relative rounded-2xl p-2 glass-card">
+                <img
+                  src={profileImg}
+                  alt="Hy Menghour"
+                  className="w-full h-[420px] object-cover object-top rounded-xl shadow-md"
+                />
+              </div>
             </div>
           </motion.div>
         </div>
@@ -192,11 +188,7 @@ export default function About() {
           {/* Quick facts card */}
           <Reveal>
             <div
-              className="p-8 rounded-xl border"
-              style={{
-                borderColor: "var(--color-border)",
-                backgroundColor: "var(--color-surface-2)",
-              }}
+              className="p-8 rounded-2xl border glass-card"
             >
               <span
                 className="label-mono block mb-6"
@@ -271,20 +263,16 @@ export default function About() {
             {VALUES.map(({ title, body }, i) => (
               <Reveal key={title}>
                 <div
-                  className="p-6 rounded-xl border h-full"
-                  style={{
-                    borderColor: "var(--color-border)",
-                    backgroundColor: "var(--color-surface)",
-                  }}
+                  className="p-7 rounded-2xl border glass-card h-full flex flex-col"
                 >
                   <span
-                    className="label-mono block mb-3"
-                    style={{ color: "var(--color-accent)" }}
+                    className="label-mono font-bold block mb-3 text-sm"
+                    style={{ color: "var(--color-amber)" }}
                   >
                     0{i + 1}
                   </span>
                   <h3
-                    className="font-bold mb-2"
+                    className="font-bold text-lg mb-2"
                     style={{ color: "var(--color-text-primary)" }}
                   >
                     {title}

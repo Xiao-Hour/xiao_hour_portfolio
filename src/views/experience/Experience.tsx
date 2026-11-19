@@ -3,7 +3,7 @@
 // ==========================================
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { SparkleIcon, ArrowUpRightIcon } from "@phosphor-icons/react";
+import { SparkleIcon } from "@phosphor-icons/react";
 
 // ==========================================
 // Animation Helper
@@ -203,7 +203,7 @@ export default function Experience() {
             />
 
             <div className="flex flex-col gap-16">
-              {EXPERIENCE.map(({ period, role, company, url, type, bullets, stack }, i) => (
+              {EXPERIENCE.map(({ period, role, company, type, bullets, stack }, i) => (
                 <Reveal key={i}>
                   <div className="relative grid md:grid-cols-2 gap-8 md:gap-16">
                     {/* Left: period (desktop) */}
@@ -229,53 +229,49 @@ export default function Experience() {
 
                     {/* Right: content */}
                     <div className="pl-8 md:pl-10">
-                      {/* Mobile period */}
-                      <span className="label-mono block mb-2 md:hidden" style={{ color: "var(--color-text-muted)" }}>
-                        {period} · {type}
-                      </span>
+                      <div className="p-7 rounded-2xl border glass-card">
+                        {/* Mobile period */}
+                        <span className="label-mono block mb-2 md:hidden" style={{ color: "var(--color-text-muted)" }}>
+                          {period} · {type}
+                        </span>
 
-                      <h2
-                        className="text-2xl font-bold mb-1"
-                        style={{ color: "var(--color-text-primary)" }}
-                      >
-                        {role}
-                      </h2>
-                      <a
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 label-mono mb-5 transition-colors duration-200"
-                        style={{ color: "var(--color-accent)" }}
-                        onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-accent-hover)")}
-                        onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-accent)")}
-                      >
-                        {company}
-                        <ArrowUpRightIcon size={12} />
-                      </a>
+                        <h2
+                          className="text-2xl font-bold mb-1"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
+                          {role}
+                        </h2>
+                        <span
+                          className="inline-flex items-center gap-1 label-mono mb-5 font-bold"
+                          style={{ color: "var(--color-accent)" }}
+                        >
+                          {company}
+                        </span>
 
-                      <ul className="flex flex-col gap-2.5 mb-6">
-                        {bullets.map((b, bi) => (
-                          <li key={bi} className="flex gap-3 text-sm" style={{ color: "var(--color-text-secondary)" }}>
-                            <span className="mt-2 w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: "var(--color-accent)" }} />
-                            {b}
-                          </li>
-                        ))}
-                      </ul>
+                        <ul className="flex flex-col gap-2.5 mb-6">
+                          {bullets.map((b, bi) => (
+                            <li key={bi} className="flex gap-3 text-sm" style={{ color: "var(--color-text-secondary)" }}>
+                              <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: "var(--color-amber)" }} />
+                              {b}
+                            </li>
+                          ))}
+                        </ul>
 
-                      <div className="flex flex-wrap gap-2">
-                        {stack.map((s) => (
-                          <span
-                            key={s}
-                            className="label-mono px-2.5 py-1 rounded"
-                            style={{
-                              backgroundColor: "var(--color-surface-2)",
-                              color: "var(--color-text-muted)",
-                              border: "1px solid var(--color-border)",
-                            }}
-                          >
-                            {s}
-                          </span>
-                        ))}
+                        <div className="flex flex-wrap gap-2 pt-4 border-t" style={{ borderColor: "var(--color-border-soft)" }}>
+                          {stack.map((s) => (
+                            <span
+                              key={s}
+                              className="label-mono text-[10px] px-2.5 py-1 rounded-md"
+                              style={{
+                                backgroundColor: "var(--color-surface-2)",
+                                color: "var(--color-text-muted)",
+                                border: "1px solid var(--color-border-soft)",
+                              }}
+                            >
+                              {s}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -295,16 +291,15 @@ export default function Experience() {
               Academic background & training.
             </h2>
           </Reveal>
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-6">
             {EDUCATION.map(({ period, degree, institution, note }) => (
               <Reveal key={degree}>
                 <div
-                  className="p-7 rounded-xl border"
-                  style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-surface-2)" }}
+                  className="p-7 rounded-2xl border glass-card"
                 >
-                  <span className="label-mono block mb-2" style={{ color: "var(--color-text-muted)" }}>{period}</span>
+                  <span className="label-mono block mb-2 font-bold" style={{ color: "var(--color-amber)" }}>{period}</span>
                   <h3 className="text-xl font-bold mb-1" style={{ color: "var(--color-text-primary)" }}>{degree}</h3>
-                  <span className="label-mono block mb-3" style={{ color: "var(--color-accent)" }}>{institution}</span>
+                  <span className="label-mono block mb-3 font-semibold" style={{ color: "var(--color-accent)" }}>{institution}</span>
                   <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>{note}</p>
                 </div>
               </Reveal>
@@ -326,18 +321,17 @@ export default function Experience() {
             {REFERENCES.map(({ name, company, position, contact }) => (
               <Reveal key={name}>
                 <div
-                  className="p-6 rounded-xl border"
-                  style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-surface)" }}
+                  className="p-7 rounded-2xl border glass-card"
                 >
-                  <span className="label-mono block mb-2" style={{ color: "var(--color-accent)" }}>Reference</span>
-                  <h3 className="text-lg font-bold mb-1" style={{ color: "var(--color-text-primary)" }}>{name}</h3>
-                  <p className="text-sm font-semibold mb-1" style={{ color: "var(--color-text-primary)" }}>{position}</p>
-                  <p className="text-sm mb-3" style={{ color: "var(--color-text-secondary)" }}>{company}</p>
-                  <div className="pt-3 border-t flex items-center justify-between" style={{ borderColor: "var(--color-border-soft)" }}>
-                    <span className="label-mono text-xs" style={{ color: "var(--color-text-muted)" }}>Tel:</span>
+                  <span className="label-mono block mb-2 font-bold" style={{ color: "var(--color-amber)" }}>Verified Reference</span>
+                  <h3 className="text-xl font-bold mb-1" style={{ color: "var(--color-text-primary)" }}>{name}</h3>
+                  <p className="text-sm font-semibold mb-1" style={{ color: "var(--color-accent)" }}>{position}</p>
+                  <p className="text-sm mb-4" style={{ color: "var(--color-text-secondary)" }}>{company}</p>
+                  <div className="pt-4 border-t flex items-center justify-between" style={{ borderColor: "var(--color-border-soft)" }}>
+                    <span className="label-mono text-xs" style={{ color: "var(--color-text-muted)" }}>Contact:</span>
                     <a
                       href={`tel:${contact.replace(/\s+/g, '')}`}
-                      className="text-sm font-bold transition-colors"
+                      className="text-sm font-bold transition-colors hover:underline"
                       style={{ color: "var(--color-accent)" }}
                     >
                       {contact}
