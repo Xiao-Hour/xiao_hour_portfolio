@@ -89,22 +89,22 @@ const MARQUEE_ITEMS = [
 
 const BENTO_SKILLS = [
   {
-    icon: DeviceMobileIcon,
-    title: "Cross-Platform Mobile",
-    tagline: "iOS & Android Applications",
+    icon: BrowserIcon,
+    title: "React & Vue.js",
+    tagline: "Core Frameworks",
     description:
-      "Developing native-like cross-platform mobile apps with Ionic Framework and Vue.js. Focused on performance optimization, responsive touch handling, and smooth hardware integrations.",
-    tags: ["Ionic", "Vue.js", "Android", "iOS", "Mobile UX", "Capacitor"],
-    gradient: "from-amber-500/10 to-orange-500/5",
+      "Architecting interactive, reactive single-page web applications with React and Vue.js (PrimeVue). Expert in modular components, data tables, modal dialogs, charts, and rigorous form validation with TypeScript.",
+    tags: ["React", "Vue.js 3", "PrimeVue", "TypeScript", "Tailwind CSS", "REST APIs"],
+    gradient: "from-amber-600/10 to-yellow-500/5",
   },
   {
-    icon: BrowserIcon,
-    title: "Modern Web & SPAs",
-    tagline: "Interactive Frontend Architecture",
+    icon: DeviceMobileIcon,
+    title: "Ionic (iOS & Android)",
+    tagline: "Cross-Platform Mobile",
     description:
-      "Crafting responsive single-page applications with Vue.js, PrimeVue, React, and TypeScript. Expert in data tables, modals, interactive charts, and rigorous form validation.",
-    tags: ["Vue 3", "PrimeVue", "React", "TypeScript", "Tailwind CSS"],
-    gradient: "from-amber-600/10 to-yellow-500/5",
+      "Developing high-performance cross-platform mobile applications using Ionic Framework. Engineered for fast load times, smooth gestures, responsive screen layouts, and consistent UI/UX across iOS and Android devices.",
+    tags: ["Ionic Framework", "iOS", "Android", "Capacitor", "Vue.js", "Mobile UX"],
+    gradient: "from-amber-500/10 to-orange-500/5",
   },
   {
     icon: DatabaseIcon,
@@ -266,9 +266,13 @@ export default function Home() {
                 className="text-lg sm:text-xl max-w-xl leading-relaxed mb-10"
                 style={{ color: "var(--color-text-secondary)" }}
               >
-                Building modern, high-performance web applications and cross-platform mobile apps with{" "}
+                Specializing in core frameworks{" "}
                 <span className="font-bold" style={{ color: "var(--color-text-primary)" }}>
-                  Vue.js (PrimeVue), Ionic Framework, React, and TypeScript
+                  React & Vue.js
+                </span>
+                , and high-performance cross-platform mobile apps with{" "}
+                <span className="font-bold" style={{ color: "var(--color-text-primary)" }}>
+                  Ionic (iOS & Android)
                 </span>
                 . Grounded in solid IT infrastructure support and proactive problem solving.
               </motion.p>
@@ -382,7 +386,7 @@ export default function Home() {
                     <div>
                       <span className="label-mono text-[9px] block text-stone-500 font-bold">Cross-Platform</span>
                       <span className="text-xs font-bold" style={{ color: "var(--color-text-primary)" }}>
-                        iOS & Android
+                        Ionic (iOS & Android)
                       </span>
                     </div>
                   </motion.div>
@@ -403,10 +407,10 @@ export default function Home() {
                     </div>
                     <div>
                       <span className="label-mono text-[10px] block" style={{ color: "var(--color-amber)" }}>
-                        Core Framework
+                        Core Frameworks
                       </span>
                       <span className="text-xs font-bold" style={{ color: "var(--color-text-primary)" }}>
-                        Vue 3 · PrimeVue SPA
+                        React & Vue.js
                       </span>
                     </div>
                   </motion.div>

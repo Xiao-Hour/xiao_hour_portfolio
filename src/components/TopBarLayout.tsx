@@ -93,24 +93,51 @@ export default function TopBarLayout() {
             </span>
           </NavLink>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1.5 p-1 rounded-xl border" style={{ borderColor: "var(--color-border-soft)", backgroundColor: "rgba(244, 240, 235, 0.6)" }} aria-label="Main navigation">
-            {NAV_ITEMS.map((item) => (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                end={item.path === "/"}
-                className="label-mono px-4 py-2 rounded-lg transition-all duration-200"
-                style={({ isActive }) => ({
-                  color: isActive ? "#fff" : "var(--color-text-secondary)",
-                  backgroundColor: isActive ? "var(--color-accent)" : "transparent",
-                  fontWeight: isActive ? 600 : 500,
-                  boxShadow: isActive ? "0 2px 8px rgba(77, 42, 0, 0.25)" : "none",
-                })}
-              >
-                {item.label}
-              </NavLink>
-            ))}
+          {/* Desktop Nav with Framer Motion Animated Transition */}
+          <nav
+            className="hidden md:flex items-center gap-1 p-1 rounded-xl border glass-panel"
+            style={{
+              borderColor: "var(--color-border-soft)",
+              backgroundColor: "rgba(244, 240, 235, 0.75)",
+            }}
+            aria-label="Main navigation"
+          >
+            {NAV_ITEMS.map((item) => {
+              const isActive =
+                item.path === "/"
+                  ? location.pathname === "/"
+                  : location.pathname.startsWith(item.path);
+
+              return (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  end={item.path === "/"}
+                  className="relative label-mono px-4 py-2 rounded-lg text-xs transition-colors duration-200"
+                  style={{
+                    color: isActive ? "#ffffff" : "var(--color-text-secondary)",
+                    fontWeight: isActive ? 700 : 500,
+                  }}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="nav-active-indicator"
+                      className="absolute inset-0 rounded-lg"
+                      style={{
+                        backgroundColor: "var(--color-accent)",
+                        boxShadow: "0 2px 10px rgba(77, 42, 0, 0.3)",
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 420,
+                        damping: 32,
+                      }}
+                    />
+                  )}
+                  <span className="relative z-10">{item.label}</span>
+                </NavLink>
+              );
+            })}
           </nav>
 
           {/* Desktop: social + CTA */}
