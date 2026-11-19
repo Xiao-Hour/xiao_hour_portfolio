@@ -93,10 +93,9 @@ export default function TopBarLayout() {
             </span>
           </NavLink>
 
-          {/* Desktop Nav with Isolated Framer Motion layoutRoot */}
-          <motion.nav
-            layoutRoot
-            className="hidden md:flex items-center gap-1 p-1 rounded-xl border glass-panel relative"
+          {/* Desktop Nav */}
+          <nav
+            className="hidden md:flex items-center gap-1 p-1 rounded-xl border glass-panel"
             style={{
               borderColor: "var(--color-border-soft)",
               backgroundColor: "rgba(244, 240, 235, 0.75)",
@@ -114,32 +113,30 @@ export default function TopBarLayout() {
                   key={item.path}
                   to={item.path}
                   end={item.path === "/"}
-                  className="relative label-mono px-4 py-2 rounded-lg text-xs transition-colors duration-150 select-none"
+                  className="label-mono px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200 select-none"
                   style={{
                     color: isActive ? "#ffffff" : "var(--color-text-secondary)",
-                    fontWeight: isActive ? 700 : 500,
+                    backgroundColor: isActive ? "var(--color-accent)" : "transparent",
+                    boxShadow: isActive ? "0 2px 8px rgba(77, 42, 0, 0.25)" : "none",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = "var(--color-accent)";
+                      e.currentTarget.style.backgroundColor = "var(--color-accent-soft)";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = "var(--color-text-secondary)";
+                      e.currentTarget.style.backgroundColor = "transparent";
+                    }
                   }}
                 >
-                  {isActive && (
-                    <motion.div
-                      layoutId="nav-active-indicator"
-                      className="absolute inset-0 rounded-lg pointer-events-none"
-                      style={{
-                        backgroundColor: "var(--color-accent)",
-                        boxShadow: "0 2px 10px rgba(77, 42, 0, 0.3)",
-                      }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 450,
-                        damping: 35,
-                      }}
-                    />
-                  )}
-                  <span className="relative z-10">{item.label}</span>
+                  {item.label}
                 </NavLink>
               );
             })}
-          </motion.nav>
+          </nav>
 
           {/* Desktop: social + CTA */}
           <div className="hidden md:flex items-center gap-3">
