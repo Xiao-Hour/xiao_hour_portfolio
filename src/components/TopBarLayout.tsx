@@ -1,7 +1,7 @@
 // ==========================================
 // Imports
 // ==========================================
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { NavLink, Outlet, useLocation, ScrollRestoration } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -39,10 +39,53 @@ export default function TopBarLayout() {
   const [scrolled, setScrolled]   = useState(false);
   const location = useLocation();
 
+  const activeIndex = NAV_ITEMS.findIndex((item) =>
+    item.path === "/"
+      ? location.pathname === "/"
+      : location.pathname.startsWith(item.path)
+  );
+
+  const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const [indicatorStyle, setIndicatorStyle] = useState<{
+    left: number;
+    width: number;
+    ready: boolean;
+  }>({
+    left: 0,
+    width: 0,
+    ready: false,
+  });
+
   useLayoutEffect(() => {
     setMenuOpen(false);
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-  }, [location.pathname]);
+
+    const targetIndex = activeIndex >= 0 ? activeIndex : 0;
+    const currentItem = itemRefs.current[targetIndex];
+    if (currentItem) {
+      setIndicatorStyle({
+        left: currentItem.offsetLeft,
+        width: currentItem.offsetWidth,
+        ready: true,
+      });
+    }
+  }, [location.pathname, activeIndex]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const targetIndex = activeIndex >= 0 ? activeIndex : 0;
+      const currentItem = itemRefs.current[targetIndex];
+      if (currentItem) {
+        setIndicatorStyle({
+          left: currentItem.offsetLeft,
+          width: currentItem.offsetWidth,
+          ready: true,
+        });
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [activeIndex]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -93,42 +136,59 @@ export default function TopBarLayout() {
             </span>
           </NavLink>
 
-          {/* Desktop Nav */}
+          {/* Desktop Nav with Smooth Relative Motion Pill */}
           <nav
-            className="hidden md:flex items-center gap-1 p-1 rounded-xl border glass-panel"
+            className="hidden md:flex items-center gap-1 p-1 rounded-xl border glass-panel relative"
             style={{
               borderColor: "var(--color-border-soft)",
               backgroundColor: "rgba(244, 240, 235, 0.75)",
             }}
             aria-label="Main navigation"
           >
-            {NAV_ITEMS.map((item) => {
-              const isActive =
-                item.path === "/"
-                  ? location.pathname === "/"
-                  : location.pathname.startsWith(item.path);
+            {/* Animated Pill Indicator */}
+            {indicatorStyle.ready && (
+              <motion.div
+                className="absolute top-1 bottom-1 rounded-lg pointer-events-none"
+                style={{
+                  backgroundColor: "var(--color-accent)",
+                  boxShadow: "0 2px 10px rgba(77, 42, 0, 0.28)",
+                }}
+                initial={false}
+                animate={{
+                  left: indicatorStyle.left,
+                  width: indicatorStyle.width,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 420,
+                  damping: 34,
+                }}
+              />
+            )}
+
+            {NAV_ITEMS.map((item, idx) => {
+              const isActive = idx === activeIndex;
 
               return (
                 <NavLink
                   key={item.path}
+                  ref={(el) => {
+                    itemRefs.current[idx] = el;
+                  }}
                   to={item.path}
                   end={item.path === "/"}
-                  className="label-mono px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200 select-none"
+                  className="relative z-10 label-mono px-4 py-2 rounded-lg text-xs font-semibold select-none transition-colors duration-200"
                   style={{
                     color: isActive ? "#ffffff" : "var(--color-text-secondary)",
-                    backgroundColor: isActive ? "var(--color-accent)" : "transparent",
-                    boxShadow: isActive ? "0 2px 8px rgba(77, 42, 0, 0.25)" : "none",
                   }}
                   onMouseEnter={(e) => {
                     if (!isActive) {
                       e.currentTarget.style.color = "var(--color-accent)";
-                      e.currentTarget.style.backgroundColor = "var(--color-accent-soft)";
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!isActive) {
                       e.currentTarget.style.color = "var(--color-text-secondary)";
-                      e.currentTarget.style.backgroundColor = "transparent";
                     }
                   }}
                 >
