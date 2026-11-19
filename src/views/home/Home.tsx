@@ -17,6 +17,8 @@ import {
   DownloadSimpleIcon,
   LightningIcon,
   ShieldCheckIcon,
+  ChartBarIcon,
+  GearIcon,
 } from "@phosphor-icons/react";
 
 import profileImg from "../../assets/image/profile.png";
@@ -131,7 +133,8 @@ const FEATURED_PROJECTS = [
     slug: "01",
     category: "Mobile Application",
     title: "Cross-Platform Mobile App (Android & iOS)",
-    highlight: "📱 High Performance • Native Look & Feel",
+    icon: DeviceMobileIcon,
+    highlight: "High Performance • Native Look & Feel",
     description:
       "Cross-platform mobile application developed with Ionic Framework, delivering seamless performance, optimized startup times, and consistent UI across Android and iOS devices.",
     tags: ["Ionic Framework", "Vue.js", "TypeScript", "Tailwind CSS"],
@@ -140,7 +143,8 @@ const FEATURED_PROJECTS = [
     slug: "02",
     category: "Enterprise SPA",
     title: "PrimeVue Enterprise Dashboard",
-    highlight: "📊 Dynamic Data Tables & Interactive Charts",
+    icon: ChartBarIcon,
+    highlight: "Dynamic Data Tables & Interactive Charts",
     description:
       "Full-featured single-page application dashboard featuring interactive data tables, dialogs, charts, complex form validation, and reliable REST API data integration.",
     tags: ["Vue.js", "PrimeVue", "TypeScript", "REST API"],
@@ -149,7 +153,8 @@ const FEATURED_PROJECTS = [
     slug: "03",
     category: "System Platform",
     title: "POS & Retail Operations Platform",
-    highlight: "⚙️ Hardware Setup & Database Maintenance",
+    icon: GearIcon,
+    highlight: "Hardware Setup & Database Maintenance",
     description:
       "Complete POS system installation, custom billing document formatting, automated database backups, SQL table queries, and dedicated on-site client technical training.",
     tags: ["POS Systems", "Database Management", "SQL", "Windows"],
@@ -550,7 +555,7 @@ export default function Home() {
           </RevealSection>
 
           <div className="grid lg:grid-cols-3 gap-8">
-            {FEATURED_PROJECTS.map(({ slug, category, title, highlight, description, tags }, i) => (
+            {FEATURED_PROJECTS.map(({ slug, category, title, icon: ProjectIcon, highlight, description, tags }, i) => (
               <RevealSection key={slug} delay={i * 0.1}>
                 <article className="p-8 rounded-2xl border glass-card h-full flex flex-col group">
                   <div className="flex items-center justify-between mb-4">
@@ -576,7 +581,11 @@ export default function Home() {
                   </h3>
 
                   <div className="mb-4">
-                    <span className="text-xs font-semibold px-2 py-1 rounded inline-block" style={{ backgroundColor: "rgba(180, 83, 9, 0.08)", color: "#b45309" }}>
+                    <span
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-md"
+                      style={{ backgroundColor: "rgba(180, 83, 9, 0.08)", color: "#b45309" }}
+                    >
+                      <ProjectIcon size={14} weight="bold" />
                       {highlight}
                     </span>
                   </div>
